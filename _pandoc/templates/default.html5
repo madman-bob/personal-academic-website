@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="generator" content="pandoc"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    $if(author)$
+    <meta name="author" content="$for(author)$$author$$sep$, $endfor$"/>
+    $endif$
+    $if(abstract)$
+    <meta name="description" content="$abstract$"/>
+    $endif$
+    $if(keywords)$
+    <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$"/>
+    $endif$
+    <title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
+    <link rel="stylesheet" href="/panam.css"/>
+    <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+$if(title)$
+<h1>$title$</h1>
+$endif$
+<div class="contact-me">
+    <a href="https://github.com/madman-bob" title="GitHub"><img src="/github.svg" alt="GitHub"/></a>
+    <a href="http://www.inf.ed.ac.uk/people/staff/Robert_Wright.html" title="Affiliation"><img src="/affiliation.svg" alt="Affiliation"/></a>
+    <a href="mailto:robert.wright@ed.ac.uk" title="Email"><img src="/email.svg" alt="Email"/></a>
+</div>
+$body$
+</body>
+</html>

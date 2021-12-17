@@ -1,0 +1,12 @@
+.contact-me {
+    display: block;
+    float: left;
+    margin-left: -64px;
+}
+
+.contact-me a {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-color: transparent;
+}
