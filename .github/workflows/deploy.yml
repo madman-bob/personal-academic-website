@@ -1,0 +1,34 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy Website
+    runs-on: ubuntu-latest
+    environment: Kudotoc
+
+    steps:
+      - name: Install requirements
+        run: sudo apt-get install -y pandoc lftp
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: make all
+
+      - name: Deploy to host
+        env:
+          HOST_ADDRESS: ${{ secrets.HOST_ADDRESS }}
+          HOST_SSH_FINGERPRINT: ${{ secrets.HOST_SSH_FINGERPRINT }}
+          HOST_USERNAME: ${{ secrets.HOST_USERNAME }}
+          LFTP_PASSWORD: ${{ secrets.HOST_PASSWORD }}
+        run: |
+          rm _output/**.md
+          mkdir -p ~/.ssh
+          echo "$HOST_SSH_FINGERPRINT" > ~/.ssh/known_hosts
+          lftp "sftp://$HOST_USERNAME@$HOST_ADDRESS" --env-password -e "mirror -Re _output .; exit"
