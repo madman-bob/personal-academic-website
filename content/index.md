@@ -16,6 +16,7 @@ As part of this project, I have:
 - Created a tool to generate [Idris 2 types from a JSON Schema](https://github.com/madman-bob/idris2-json-schema).
 - Created an Idris 2 [XML library](https://github.com/madman-bob/idris2-xml).
 - Created an Idris 2 [LibreOffice file manipulation library](https://github.com/madman-bob/idris2-odf).
+- Created an Idris 2 [Table library](https://github.com/madman-bob/idris2-table).
 
 # Talks
 
