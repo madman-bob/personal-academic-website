@@ -20,6 +20,16 @@ As part of this project, I have:
 
 # Talks
 
+## Idris Type-Driven Data Science
+
+Traditionally, most data science is done in dynamically typed languages. If you're manipulating a table of data, and make a typo in a column name, or ask for the wrong column, then you don't find out until runtime - after which significant computation may have taken place. So a small mistake could lose a large amount of time.
+
+With dependant types, we can express the schemas of tables at compile-time. This allows us to check, at compile-time, that our columns exist, and are of the correct types.
+
+We will go through a simple machine learning example, and show the whole workflow, to demonstrate how dependant types can help the process.
+
+No recording is available for this talk.
+
 ## Idris Data Science Infrastructure
 
 An introduction to a number of tools supporting data science work in Idris. We will talk about tools for extracting data from businesses, presenting results to stakeholders, and other tools that were developed in the course of developing these tools.
