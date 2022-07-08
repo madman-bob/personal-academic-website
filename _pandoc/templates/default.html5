@@ -23,7 +23,7 @@ $if(title)$
 $endif$
 <div class="contact-me">
     <a href="https://github.com/madman-bob" title="GitHub"><img src="/github.svg" alt="GitHub"/></a>
-    <a href="http://www.inf.ed.ac.uk/people/staff/Robert_Wright.html" title="Affiliation"><img src="/affiliation.svg" alt="Affiliation"/></a>
+    <a href="https://www.inf.ed.ac.uk/people/students/Robert_Wright.html" title="Affiliation"><img src="/affiliation.svg" alt="Affiliation"/></a>
     <a href="mailto:robert.wright@ed.ac.uk" title="Email"><img src="/email.svg" alt="Email"/></a>
 </div>
 $body$
