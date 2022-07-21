@@ -28,7 +28,6 @@ jobs:
           HOST_USERNAME: ${{ secrets.HOST_USERNAME }}
           LFTP_PASSWORD: ${{ secrets.HOST_PASSWORD }}
         run: |
-          rm _output/**.md
           mkdir -p ~/.ssh
           echo "$HOST_SSH_FINGERPRINT" > ~/.ssh/known_hosts
           lftp "sftp://$HOST_USERNAME@$HOST_ADDRESS" --env-password -e "mirror -Re _output .; exit"

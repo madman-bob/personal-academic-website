@@ -1,5 +1,4 @@
-/content/panam.css
-/content/*.svg
+/asset/panam.css
+/asset/*.svg
 
-/pandoc-ssg.mk
 /_output/

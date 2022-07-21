@@ -1,27 +1,26 @@
-.PHONY: all serve clean
+.PHONY: all serve mostlyclean clean
 
-all: content/panam.css content/github.svg content/affiliation.svg content/email.svg pandoc-ssg.mk
-	cd content && make -f ../pandoc-ssg.mk PANDOC=$(abspath _pandoc) PANDOC_ARGS="" _build
+PANDOC=pandoc
+PANDOC_ARGS=--no-highlight --shift-heading-level-by=1
+
+CONTENT_MDS := $(wildcard content/*.md)
+CONTENT_OUTPUT := $(patsubst content/%.md,_output/%.html,$(CONTENT_MDS))
+
+all: $(CONTENT_OUTPUT)
+	make -C asset all
+	cp asset/*.svg _output
+	cp asset/*.css _output
 
 serve:
-	make -f pandoc-ssg.mk _serve
+	python3 -m http.server --directory _output 8000 --bind 127.0.0.1
 
-content/panam.css:
-	wget -nv -O content/panam.css http://b.enjam.info/panam/styling.css
+_output/%.html: content/%.md
+	mkdir -p "_output"
+	$(PANDOC) $(PANDOC_ARGS) --data-dir="_pandoc" --to=html --template="default" --output="$@" "$<"
 
-content/github.svg:
-	wget -nv -O content/github.svg https://icons.getbootstrap.com/assets/icons/github.svg
+mostlyclean:
+	$(RM) -r _output
 
-content/affiliation.svg:
-	wget -nv -O content/affiliation.svg https://icons.getbootstrap.com/assets/icons/building.svg
-
-content/email.svg:
-	wget -nv -O content/email.svg https://icons.getbootstrap.com/assets/icons/envelope.svg
-
-pandoc-ssg.mk:
-	wget -nv -O pandoc-ssg.mk https://raw.githubusercontent.com/ivanstojic/pandoc-ssg/master/Makefile
-
-clean: pandoc-ssg.mk
-	cd content && make -f ../pandoc-ssg.mk _clean
-	$(RM) content/panam.css
-	$(RM) content/*.svg
+clean:
+	make mostlyclean
+	make -C asset clean
