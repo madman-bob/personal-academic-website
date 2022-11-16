@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: Install requirements
-        run: sudo apt-get install -y pandoc lftp
+        run: sudo apt-get install -y pandoc
 
       - name: Checkout
         uses: actions/checkout@v2
@@ -26,10 +26,14 @@ jobs:
       - name: Deploy to host
         env:
           HOST_ADDRESS: ${{ secrets.HOST_ADDRESS }}
+          HOST_PORT: ${{ secrets.HOST_PORT }}
+          HOST_PATH: ${{ secrets.HOST_PATH }}
           HOST_SSH_FINGERPRINT: ${{ secrets.HOST_SSH_FINGERPRINT }}
           HOST_USERNAME: ${{ secrets.HOST_USERNAME }}
-          LFTP_PASSWORD: ${{ secrets.HOST_PASSWORD }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
           echo "$HOST_SSH_FINGERPRINT" > ~/.ssh/known_hosts
-          lftp "sftp://$HOST_USERNAME@$HOST_ADDRESS" --env-password -e "mirror -Re _output .; exit"
+          rsync -a -e "ssh -p $HOST_PORT" _output/ "$HOST_USERNAME@$HOST_ADDRESS:$HOST_PATH"
