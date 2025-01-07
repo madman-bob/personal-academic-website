@@ -3,9 +3,19 @@ title: Robert Wright
 author: Robert Wright
 ---
 
+# Interests
+
+I'm interested in dependent types and metaprogramming.
+
 # Current project
 
-I'm currently working on [type-driven data-science infrastructure for Idris2](https://vetss.org.uk/type-driven-data-science-infrastructure-for-idris2/), supported by the [National Cyber Security Centre (NCSC)](https://www.ncsc.gov.uk/), as part of the [UK Research Institute in Verified Trustworhy Software Systems](https://vetss.org.uk/), led by [Ohad Kammar](https://www.denotational.co.uk/), at the [University of Edinburgh](https://www.ed.ac.uk/).
+I'm a PhD student with [Ohad Kammar](https://www.denotational.co.uk/), at the [University of Edinburgh](https://www.ed.ac.uk/). I'm working on [metaprogramming by reusing fragments of the host language](https://github.com/madman-bob/semantic-reflection).
+
+# Previous projects
+
+## [Type-driven data-science infrastructure for Idris2](https://vetss.org.uk/type-driven-data-science-infrastructure-for-idris2/)
+
+Supported by the [National Cyber Security Centre (NCSC)](https://www.ncsc.gov.uk/), as part of the [UK Research Institute in Verified Trustworthy Software Systems](https://vetss.org.uk/), led by [Ohad Kammar](https://www.denotational.co.uk/), at the [University of Edinburgh](https://www.ed.ac.uk/).
 
 As part of this project, I have:
 
