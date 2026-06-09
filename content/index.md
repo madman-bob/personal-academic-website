@@ -3,6 +3,8 @@ title: Robert Wright
 author: Robert Wright
 ---
 
+![](profile.jpg){.profile alt="Profile picture"}
+
 # Interests
 
 I'm interested in dependent types and metaprogramming.

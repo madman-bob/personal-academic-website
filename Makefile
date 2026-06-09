@@ -26,6 +26,7 @@ BUILD_TALK_BLURBS := for talk in $(TALKS_DIR)/*/talk.md; do { \
 
 all: $(CONTENT_OUTPUT)
 	make -C asset all
+	cp asset/*.jpg _output
 	cp asset/*.svg _output
 	cp asset/*.css _output
 

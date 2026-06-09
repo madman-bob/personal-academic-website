@@ -42,3 +42,8 @@ a {
     height: 16px;
     border-color: transparent;
 }
+
+.profile {
+    float: right;
+    margin: 0.5em;
+}
