@@ -7,6 +7,7 @@ BUILD_PAGE := $(PANDOC) $(PANDOC_ARGS) --to=html --template="default"
 
 CONTENT_MDS := $(wildcard content/*.md)
 CONTENT_OUTPUT := $(patsubst content/%.md,_output/%.html,$(CONTENT_MDS))
+TEMPLATES := $(wildcard _pandoc/templates/*.*)
 
 TALKS_DIR=talks
 # Use find instead of wildcard, as wildcard can't cope with spaces in filenames
@@ -31,11 +32,11 @@ all: $(CONTENT_OUTPUT)
 serve:
 	python3 -m http.server --directory _output 8000 --bind 127.0.0.1
 
-_output/%.html: content/%.md
+_output/%.html: content/%.md $(TEMPLATES)
 	mkdir -p "_output"
 	$(BUILD_PAGE) --output="$@" "$<"
 
-_output/index.html: content/index.md $(TALKS)
+_output/index.html: content/index.md $(TEMPLATES) $(TALKS)
 	mkdir -p "_output"
 	{ cat "$<"; printf "\n# Talks\n"; $(BUILD_TALK_BLURBS); } | $(BUILD_PAGE) --output="$@"
 

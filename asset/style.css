@@ -1,7 +1,39 @@
-.contact-me {
-    display: block;
-    float: left;
-    margin-left: -64px;
+body {
+    padding: 1em;
+    font-family: Verdana, sans-serif;
+    background-color: #3C1518;
+}
+
+.content {
+    margin: auto;
+    padding: 1px 1em;
+    max-width: 800px;
+    background-color: #DDDDDD;
+    color: black;
+}
+
+h1 {
+    color: #3C1518;
+}
+
+h2 {
+    color: #69140E;
+}
+
+h3 {
+    color: #A44200;
+}
+
+h4 {
+    color: #D58936;
+}
+
+h5 {
+    color: #FFFB46;
+}
+
+a {
+    color: inherit;
 }
 
 .contact-me a {
