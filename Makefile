@@ -1,9 +1,12 @@
 .PHONY: all serve mostlyclean clean
 
+STYLE_INTEGRITY := $(shell sha256sum asset/style.css | cut -c 1-64 | xxd -r -p | base64)
+
 PANDOC=pandoc
 PANDOC_ARGS=--data-dir="_pandoc" --no-highlight --shift-heading-level-by=1
 
-BUILD_PAGE := $(PANDOC) $(PANDOC_ARGS) --to=html --template="default"
+BUILD_PAGE := $(PANDOC) $(PANDOC_ARGS) --to=html --template="default" \
+	--metadata=style_integrity=$(STYLE_INTEGRITY)
 
 CONTENT_MDS := $(wildcard content/*.md)
 CONTENT_OUTPUT := $(patsubst content/%.md,_output/%.html,$(CONTENT_MDS))
@@ -33,11 +36,11 @@ all: $(CONTENT_OUTPUT)
 serve:
 	python3 -m http.server --directory _output 8000 --bind 127.0.0.1
 
-_output/%.html: content/%.md $(TEMPLATES)
+_output/%.html: content/%.md asset/style.css $(TEMPLATES)
 	mkdir -p "_output"
 	$(BUILD_PAGE) --output="$@" "$<"
 
-_output/index.html: content/index.md $(TEMPLATES) $(TALKS)
+_output/index.html: content/index.md asset/style.css $(TEMPLATES) $(TALKS)
 	mkdir -p "_output"
 	{ cat "$<"; printf "\n# Talks\n"; $(BUILD_TALK_BLURBS); } | $(BUILD_PAGE) --output="$@"
 
