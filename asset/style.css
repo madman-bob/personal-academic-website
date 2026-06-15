@@ -67,3 +67,10 @@ a:not(:has(img)) {
     float: right;
     margin: 0.5em;
 }
+
+@media (max-width: 600px) {
+    p:has(.profile) {
+        display: flex;
+        justify-content: center;
+    }
+}
