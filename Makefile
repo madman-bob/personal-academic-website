@@ -8,8 +8,8 @@ PANDOC_ARGS=--data-dir="_pandoc" --no-highlight --shift-heading-level-by=1
 BUILD_PAGE := $(PANDOC) $(PANDOC_ARGS) --to=html --template="default" \
 	--metadata=style_integrity=$(STYLE_INTEGRITY)
 
-CONTENT_MDS := $(wildcard content/*.md)
-CONTENT_OUTPUT := $(patsubst content/%.md,_output/%.html,$(CONTENT_MDS))
+CONTENT_MDS := $(filter-out content/index.md,$(wildcard content/*.md))
+CONTENT_OUTPUT := _output/index.html $(patsubst content/%.md,_output/%/index.html,$(CONTENT_MDS))
 TEMPLATES := $(wildcard _pandoc/templates/*.*)
 
 TALKS_DIR=talks
@@ -36,8 +36,8 @@ all: $(CONTENT_OUTPUT)
 serve:
 	python3 -m http.server --directory _output 8000 --bind 127.0.0.1
 
-_output/%.html: content/%.md asset/style.css $(TEMPLATES)
-	mkdir -p "_output"
+_output/%/index.html: content/%.md asset/style.css $(TEMPLATES)
+	mkdir -p "_output/$*"
 	$(BUILD_PAGE) --output="$@" "$<"
 
 _output/index.html: content/index.md asset/style.css $(TEMPLATES) $(TALKS)
