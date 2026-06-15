@@ -36,6 +36,26 @@ a {
     color: inherit;
 }
 
+a:not(:has(img)) {
+    &::before {
+        display: inline-block;
+        margin-right: 4px;
+        vertical-align: middle;
+    }
+
+    &[href^="https://github"]::before {
+        content: url(/github.svg);
+    }
+
+    &[href^="https://www.youtube.com"]::before {
+        content: url(/youtube.svg);
+    }
+
+    &[href^="https://youtu.be"]::before {
+        content: url(/youtube.svg);
+    }
+}
+
 .contact-me a {
     display: inline-block;
     width: 16px;
