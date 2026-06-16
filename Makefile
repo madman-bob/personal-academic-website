@@ -1,11 +1,13 @@
 .PHONY: all serve mostlyclean clean
 
+STYLE_SUFFIX := $(shell sha256sum asset/style.css | cut -c 1-8)
 STYLE_INTEGRITY := $(shell sha256sum asset/style.css | cut -c 1-64 | xxd -r -p | base64)
 
 PANDOC=pandoc
 PANDOC_ARGS=--data-dir="_pandoc" --no-highlight --shift-heading-level-by=1
 
 BUILD_PAGE := $(PANDOC) $(PANDOC_ARGS) --to=html --template="default" \
+	--metadata=style_suffix=$(STYLE_SUFFIX) \
 	--metadata=style_integrity=$(STYLE_INTEGRITY)
 
 CONTENT_MDS := $(filter-out content/index.md,$(wildcard content/*.md))
@@ -31,7 +33,9 @@ all: $(CONTENT_OUTPUT)
 	make -C asset all
 	cp asset/*.jpg _output
 	cp asset/*.svg _output
-	cp asset/*.css _output
+
+	$(RM) _output/style-*.css
+	cp asset/style.css "_output/style-$(STYLE_SUFFIX).css"
 
 serve:
 	python3 -m http.server --directory _output 8000 --bind 127.0.0.1
